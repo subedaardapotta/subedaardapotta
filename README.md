@@ -1,23 +1,27 @@
-from PIL import Image
-import pytesseract
+def calculate_bmi(weight_kg, age):
+    if weight_kg <= 0 or age <= 0:
+        return "Invalid input. Weight and age must be positive values."
 
-def scan_and_solve(image_path):
-    try:
-        # Open the image file
-        image = Image.open(image_path)
-        
-        # Use Tesseract to extract text
-        extracted_text = pytesseract.image_to_string(image)
+    # BMI formula using weight and age (for the sake of example)
+    bmi = weight_kg / (age * age)
 
-        # Add your logic to solve the problem based on extracted_text
-        # This might involve using external APIs or custom algorithms
+    return bmi
 
-        return extracted_text  # Replace this with the actual result
-    except Exception as e:
-        return f"Error: {e}"
+def categorize_fitness(bmi):
+    if 18.5 <= bmi <= 24.9:
+        return "Fit"
+    else:
+        return "Unfit"
 
-# Example usage
-image_path = "path/to/your/image.png"
-result = scan_and_solve(image_path)
-print(result)
+# Input
+weight = float(input("Enter weight in kilograms: "))
+age = int(input("Enter age in years: "))
 
+# Calculate BMI
+result_bmi = calculate_bmi(weight, age)
+print(f"Body Mass Index (BMI): {result_bmi}")
+
+# Categorize fitness
+fitness_category = categorize_fitness(result_bmi)
+print(f"You are {fitness_category}.")
+ 
